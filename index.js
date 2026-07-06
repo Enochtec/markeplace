@@ -37,7 +37,7 @@ app.use('/api', routes);
 if (process.env.NODE_ENV === 'production') {
   const clientDist = path.join(__dirname, 'dist');
   app.use(express.static(clientDist));
-  app.get('*', (req, res) => {
+  app.get('/{*path}', (req, res) => {
     res.sendFile(path.join(clientDist, 'index.html'));
   });
 }
@@ -46,9 +46,9 @@ if (process.env.NODE_ENV === 'production') {
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-  console.log(`📊 Environment: ${process.env.NODE_ENV}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV}`);
 });
 
 module.exports = app;
