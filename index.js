@@ -3,8 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
-const { errorHandler, notFound } = require('./src/middleware/error.middleware');
-const routes = require('./src/routes');
+const { errorHandler, notFound } = require('./api/middleware/error.middleware');
+const routes = require('./api/routes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -35,7 +35,7 @@ app.use('/api', routes);
 
 // Serve client build in production
 if (process.env.NODE_ENV === 'production') {
-  const clientDist = path.join(__dirname, '../client/dist');
+  const clientDist = path.join(__dirname, 'dist');
   app.use(express.static(clientDist));
   app.get('*', (req, res) => {
     res.sendFile(path.join(clientDist, 'index.html'));

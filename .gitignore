@@ -1,6 +1,8 @@
 node_modules
 dist
 .env
+client/
+server/
 *.log
 .DS_Store
 .vscode
