@@ -18,7 +18,7 @@ export default function Navbar() {
   const [adIndex, setAdIndex] = useState(0);
 
   const topAds = [
-    { text: 'Free delivery on orders over $50 — Shop with confidence', image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1920&q=80' },
+    { text: 'Free delivery on orders over KES 50 — Shop with confidence', image: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1920&q=80' },
     { text: 'Summer Sale — Up to 40% off selected items', image: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1920&q=80' },
     { text: 'New sellers welcome — Start your shop today', image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1920&q=80' },
   ];

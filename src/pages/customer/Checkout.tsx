@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Package, CreditCard, Truck } from 'lucide-react';
 import { useCart } from '../../contexts/CartContext';
 import { ordersApi } from '../../api/orders';
+import { formatPrice } from '../../utils/format';
 import toast from 'react-hot-toast';
 
 interface CheckoutForm {
@@ -142,17 +143,17 @@ export default function Checkout() {
                         <p className="text-xs text-gray-400">x{item.quantity}</p>
                       </div>
                       <p className="text-sm font-semibold text-gray-900 flex-shrink-0">
-                        ${(item.product.price * item.quantity).toFixed(2)}
+                        {formatPrice(item.product.price * item.quantity)}
                       </p>
                     </div>
                   );
                 })}
               </div>
               <div className="border-t border-gray-100 pt-4 space-y-2 text-sm text-gray-600">
-                <div className="flex justify-between"><span>Subtotal</span><span>${total.toFixed(2)}</span></div>
-                <div className="flex justify-between"><span>Shipping</span><span className={shippingFee === 0 ? 'text-green-600' : ''}>{shippingFee === 0 ? 'Free' : `$${shippingFee}`}</span></div>
+                <div className="flex justify-between"><span>Subtotal</span><span>{formatPrice(total)}</span></div>
+                <div className="flex justify-between"><span>Shipping</span><span className={shippingFee === 0 ? 'text-green-600' : ''}>{shippingFee === 0 ? 'Free' : formatPrice(shippingFee)}</span></div>
                 <div className="flex justify-between text-base font-bold text-gray-900 border-t border-gray-100 pt-2">
-                  <span>Total</span><span>${(total + shippingFee).toFixed(2)}</span>
+                  <span>Total</span><span>{formatPrice(total + shippingFee)}</span>
                 </div>
               </div>
               <button type="submit" disabled={isSubmitting}

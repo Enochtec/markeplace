@@ -64,8 +64,8 @@ export default function Products() {
   const activeFilters = [
     search && { key: 'search', label: `"${search}"` },
     category && { key: 'category', label: categories.find(c => c.slug === category)?.name || category },
-    minPrice && { key: 'minPrice', label: `Min $${minPrice}` },
-    maxPrice && { key: 'maxPrice', label: `Max $${maxPrice}` },
+    minPrice && { key: 'minPrice', label: `Min KES ${parseFloat(minPrice).toLocaleString('en-KE')}` },
+    maxPrice && { key: 'maxPrice', label: `Max KES ${parseFloat(maxPrice).toLocaleString('en-KE')}` },
     featured && { key: 'featured', label: 'Featured' },
   ].filter(Boolean) as { key: string; label: string }[];
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Package } from 'lucide-react';
 import type { Order, PaginationMeta } from '../../types';
 import { ordersApi } from '../../api/orders';
+import { formatPrice } from '../../utils/format';
 import Pagination from '../../components/common/Pagination';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import toast from 'react-hot-toast';
@@ -81,7 +82,7 @@ export default function ShopOrders() {
                       <p className="text-xs text-gray-400">{order.user?.email}</p>
                     </td>
                     <td className="px-5 py-4 text-sm text-gray-600">{order.items?.length || 0} items</td>
-                    <td className="px-5 py-4 text-sm font-bold text-gray-900">${order.totalAmount.toFixed(2)}</td>
+                    <td className="px-5 py-4 text-sm font-bold text-gray-900">{formatPrice(order.totalAmount)}</td>
                     <td className="px-5 py-4">
                       <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${STATUS_STYLES[order.status] || 'bg-gray-50 text-gray-600'}`}>
                         {order.status}

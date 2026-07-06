@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  DollarSign, ShoppingBag, Store, Users, Package, Clock, TrendingUp,
+  Banknote, ShoppingBag, Store, Users, Package, Clock, TrendingUp,
   UserPlus, ArrowRight, CreditCard, AlertCircle, Activity,
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { settingsApi } from '../../api/settings';
+import { formatPrice } from '../../utils/format';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 interface DashboardStats {
@@ -32,7 +33,7 @@ export default function AdminDashboard() {
   const maxRevenue = Math.max(...monthlyRevenue.map(m => m.revenue), 1);
 
   const kpiCards = [
-    { label: 'Total Revenue', value: `$${stats.totalRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`, icon: DollarSign },
+    { label: 'Total Revenue', value: formatPrice(stats.totalRevenue), icon: Banknote },
     { label: 'Total Orders', value: stats.totalOrders.toLocaleString(), icon: ShoppingBag },
     { label: 'Active Shops', value: stats.activeShops.toLocaleString(), icon: Store },
     { label: 'Customers', value: stats.totalUsers.toLocaleString(), icon: Users },
@@ -104,9 +105,9 @@ export default function AdminDashboard() {
           ) : (
             <div className="relative h-44">
               <div className="absolute left-0 top-0 bottom-6 w-10 flex flex-col justify-between text-xs text-gray-400 pb-1">
-                <span>${(maxRevenue / 1000).toFixed(1)}k</span>
-                <span>${(maxRevenue / 2000).toFixed(1)}k</span>
-                <span>$0</span>
+                <span>KES {(maxRevenue / 1000).toFixed(1)}k</span>
+                <span>KES {(maxRevenue / 2000).toFixed(1)}k</span>
+                <span>KES 0</span>
               </div>
               <div className="ml-12 h-full flex items-end gap-3">
                 {monthlyRevenue.map(({ month, revenue }) => {
@@ -114,7 +115,7 @@ export default function AdminDashboard() {
                   return (
                     <div key={month} className="flex-1 flex flex-col items-center gap-2 h-full justify-end">
                       <span className="text-xs font-semibold text-gray-500">
-                        ${revenue >= 1000 ? `${(revenue / 1000).toFixed(1)}k` : revenue.toFixed(0)}
+                        {revenue >= 1000 ? `KES ${(revenue / 1000).toFixed(1)}k` : formatPrice(revenue)}
                       </span>
                       <div className="w-full bg-orange-500 rounded-t-lg transition-opacity hover:opacity-80" style={{ height: `${height}%` }} />
                       <span className="text-xs font-medium text-gray-500">{month}</span>

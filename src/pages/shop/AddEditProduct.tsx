@@ -147,13 +147,13 @@ export default function AddEditProduct() {
           <h3 className="font-semibold text-gray-800">Pricing & Inventory</h3>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Price ($) *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Price (KES) *</label>
               <input type="number" step="0.01" min="0" {...register('price', { required: 'Required', min: { value: 0.01, message: 'Must be > 0' } })}
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100" />
               {errors.price && <p className="text-red-500 text-xs mt-1">{errors.price.message}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Compare Price ($)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Compare Price (KES)</label>
               <input type="number" step="0.01" min="0" {...register('comparePrice')}
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100"
                 placeholder="Original price" />

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Heart, ShoppingCart } from 'lucide-react';
 import type { Product } from '../../types';
 import StarRating from './StarRating';
+import { formatPrice } from '../../utils/format';
 import { useAuth } from '../../contexts/AuthContext';
 import { useCart } from '../../contexts/CartContext';
 import { useWishlist } from '../../contexts/WishlistContext';
@@ -95,9 +96,9 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
           <div className="mt-2.5 flex items-center justify-between">
             <div>
-              <span className="text-base font-bold text-gray-900">${product.price.toFixed(2)}</span>
+              <span className="text-base font-bold text-gray-900">{formatPrice(product.price)}</span>
               {product.comparePrice && (
-                <span className="ml-1.5 text-xs text-gray-400 line-through">${product.comparePrice.toFixed(2)}</span>
+                <span className="ml-1.5 text-xs text-gray-400 line-through">{formatPrice(product.comparePrice)}</span>
               )}
             </div>
             <button

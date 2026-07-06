@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Plus, Pencil, Trash2, Package, ToggleLeft, ToggleRight } from 'lucide-react';
 import type { Product, PaginationMeta } from '../../types';
 import { productsApi } from '../../api/products';
+import { formatPrice } from '../../utils/format';
 import Pagination from '../../components/common/Pagination';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import toast from 'react-hot-toast';
@@ -91,8 +92,8 @@ export default function ShopProducts() {
                       </td>
                       <td className="px-5 py-3.5 text-sm text-gray-600">{category?.name || '—'}</td>
                       <td className="px-5 py-3.5">
-                        <span className="text-sm font-bold text-gray-900">${product.price.toFixed(2)}</span>
-                        {product.comparePrice && <span className="text-xs text-gray-400 line-through ml-1">${product.comparePrice.toFixed(2)}</span>}
+                        <span className="text-sm font-bold text-gray-900">{formatPrice(product.price)}</span>
+                        {product.comparePrice && <span className="text-xs text-gray-400 line-through ml-1">{formatPrice(product.comparePrice)}</span>}
                       </td>
                       <td className="px-5 py-3.5">
                         <span className={`text-sm font-semibold ${product.stock <= 5 ? 'text-red-500' : 'text-gray-800'}`}>{product.stock}</span>

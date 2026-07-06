@@ -58,7 +58,7 @@ export default function Home() {
   const heroBanner = banners[currentBanner];
 
   const trustItems = [
-    { image: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=80&q=80', title: 'Free Delivery', desc: 'On orders over $50' },
+    { image: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?w=80&q=80', title: 'Free Delivery', desc: 'On orders over KES 50' },
     { image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=80&q=80', title: 'Secure Payment', desc: '100% protected' },
     { image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80', title: '24/7 Support', desc: 'Always here to help' },
     { image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=80&q=80', title: 'Top Rated', desc: '4.8 avg from 50K+ reviews' },

@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Package } from 'lucide-react';
 import type { Order } from '../../types';
 import { ordersApi } from '../../api/orders';
+import { formatPrice } from '../../utils/format';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 const STATUS_STYLES: Record<string, string> = {
@@ -71,9 +72,9 @@ export default function OrderDetail() {
                     )}
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold text-gray-800">{item.product?.name}</p>
-                      <p className="text-xs text-gray-500">Qty: {item.quantity} x ${item.price.toFixed(2)}</p>
+                      <p className="text-xs text-gray-500">Qty: {item.quantity} x {formatPrice(item.price)}</p>
                     </div>
-                    <p className="text-sm font-bold text-gray-900">${(item.price * item.quantity).toFixed(2)}</p>
+                    <p className="text-sm font-bold text-gray-900">{formatPrice(item.price * item.quantity)}</p>
                   </div>
                 );
               })}
@@ -98,17 +99,17 @@ export default function OrderDetail() {
             <div className="p-4 bg-gray-50 rounded-xl space-y-2 text-sm">
               <div className="flex justify-between text-gray-600">
                 <span>Subtotal</span>
-                <span>${order.totalAmount.toFixed(2)}</span>
+                <span>{formatPrice(order.totalAmount)}</span>
               </div>
               <div className="flex justify-between text-gray-600">
                 <span>Shipping</span>
                 <span className={order.shippingFee === 0 ? 'text-green-600' : ''}>
-                  {order.shippingFee === 0 ? 'Free' : `$${order.shippingFee.toFixed(2)}`}
+                  {order.shippingFee === 0 ? 'Free' : formatPrice(order.shippingFee)}
                 </span>
               </div>
               <div className="flex justify-between font-bold text-gray-900 border-t border-gray-200 pt-2">
                 <span>Total</span>
-                <span>${(order.totalAmount + order.shippingFee).toFixed(2)}</span>
+                <span>{formatPrice(order.totalAmount + order.shippingFee)}</span>
               </div>
               {order.paymentMethod && (
                 <div className="flex justify-between text-gray-500 pt-1">

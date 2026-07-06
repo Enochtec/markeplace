@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Package, ShoppingBag, DollarSign, Users, TrendingUp, Clock, ArrowRight } from 'lucide-react';
+import { Package, ShoppingBag, Banknote, Users, TrendingUp, Clock, ArrowRight } from 'lucide-react';
 import { shopsApi } from '../../api/shops';
+import { formatPrice } from '../../utils/format';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 const STATUS_STYLES: Record<string, string> = {
@@ -30,7 +31,7 @@ export default function ShopDashboard() {
   const { shop, stats, recentOrders } = data;
 
   const statCards = [
-    { label: 'Total Revenue', value: `$${stats.totalRevenue.toFixed(2)}`, icon: DollarSign, color: 'bg-green-50 text-green-600', change: '' },
+    { label: 'Total Revenue', value: formatPrice(stats.totalRevenue), icon: Banknote, color: 'bg-green-50 text-green-600', change: '' },
     { label: 'Pending Orders', value: stats.pendingOrders, icon: Clock, color: 'bg-yellow-50 text-yellow-600', change: '' },
     { label: 'Total Products', value: stats.totalProducts, icon: Package, color: 'bg-blue-50 text-blue-600', change: '' },
     { label: 'Total Orders', value: stats.totalOrders, icon: ShoppingBag, color: 'bg-purple-50 text-purple-600', change: '' },
@@ -109,7 +110,7 @@ export default function ShopDashboard() {
                   <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${STATUS_STYLES[order.status] || 'bg-gray-50 text-gray-600'}`}>
                     {order.status}
                   </span>
-                  <span className="text-sm font-bold text-gray-900">${order.totalAmount.toFixed(2)}</span>
+                  <span className="text-sm font-bold text-gray-900">{formatPrice(order.totalAmount)}</span>
                 </div>
               </div>
             ))}

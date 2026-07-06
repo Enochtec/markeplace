@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Trash2, Plus, Minus, ShoppingBag, ArrowRight } from 'lucide-react';
 import { useCart } from '../../contexts/CartContext';
+import { formatPrice } from '../../utils/format';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 export default function Cart() {
@@ -67,8 +68,8 @@ export default function Cart() {
                       </button>
                     </div>
                     <div className="text-right">
-                      <p className="text-base font-bold text-gray-900">${(item.product.price * item.quantity).toFixed(2)}</p>
-                      <p className="text-xs text-gray-400">${item.product.price.toFixed(2)} each</p>
+                      <p className="text-base font-bold text-gray-900">{formatPrice(item.product.price * item.quantity)}</p>
+                      <p className="text-xs text-gray-400">{formatPrice(item.product.price)} each</p>
                     </div>
                   </div>
                 </div>
@@ -87,20 +88,20 @@ export default function Cart() {
             <div className="space-y-3 text-sm text-gray-600">
               <div className="flex justify-between">
                 <span>Subtotal ({itemCount} items)</span>
-                <span className="font-medium text-gray-800">${total.toFixed(2)}</span>
+                <span className="font-medium text-gray-800">{formatPrice(total)}</span>
               </div>
               <div className="flex justify-between">
                 <span>Shipping</span>
-                <span className="text-green-600 font-medium">{total >= 50 ? 'Free' : '$4.99'}</span>
+                <span className="text-green-600 font-medium">{total >= 50 ? 'Free' : 'KES 4.99'}</span>
               </div>
               {total < 50 && (
                 <p className="text-xs text-orange-500 bg-orange-50 px-3 py-2 rounded-lg">
-                  Add ${(50 - total).toFixed(2)} more to get free shipping!
+                  Add {formatPrice(50 - total)} more to get free shipping!
                 </p>
               )}
               <div className="border-t border-gray-100 pt-3 flex justify-between text-base font-bold text-gray-900">
                 <span>Total</span>
-                <span>${(total + (total >= 50 ? 0 : 4.99)).toFixed(2)}</span>
+                <span>{formatPrice(total + (total >= 50 ? 0 : 4.99))}</span>
               </div>
             </div>
             <Link to="/checkout"

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Package, ChevronRight } from 'lucide-react';
 import type { Order, PaginationMeta } from '../../types';
 import { ordersApi } from '../../api/orders';
+import { formatPrice } from '../../utils/format';
 import Pagination from '../../components/common/Pagination';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
@@ -67,7 +68,7 @@ export default function Orders() {
                   <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${STATUS_STYLES[order.status] || 'bg-gray-50 text-gray-600'}`}>
                     {order.status}
                   </span>
-                  <span className="text-sm font-bold text-gray-900">${order.totalAmount.toFixed(2)}</span>
+                  <span className="text-sm font-bold text-gray-900">{formatPrice(order.totalAmount)}</span>
                 </div>
               </div>
               <div className="p-4">

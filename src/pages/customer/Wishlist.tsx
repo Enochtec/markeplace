@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Heart, ShoppingCart, Trash2 } from 'lucide-react';
 import { useWishlist } from '../../contexts/WishlistContext';
 import { useCart } from '../../contexts/CartContext';
+import { formatPrice } from '../../utils/format';
 import StarRating from '../../components/common/StarRating';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import toast from 'react-hot-toast';
@@ -62,9 +63,9 @@ export default function Wishlist() {
                   <StarRating rating={item.product.rating} size={12} showCount={false} />
                   <div className="flex items-center justify-between mt-3">
                     <div>
-                      <span className="font-bold text-gray-900">${item.product.price.toFixed(2)}</span>
+                      <span className="font-bold text-gray-900">{formatPrice(item.product.price)}</span>
                       {item.product.comparePrice && (
-                        <span className="ml-1.5 text-xs text-gray-400 line-through">${item.product.comparePrice.toFixed(2)}</span>
+                        <span className="ml-1.5 text-xs text-gray-400 line-through">{formatPrice(item.product.comparePrice)}</span>
                       )}
                     </div>
                   </div>

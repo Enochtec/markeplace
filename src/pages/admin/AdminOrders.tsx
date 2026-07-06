@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import type { Order, PaginationMeta } from '../../types';
 import { ordersApi } from '../../api/orders';
+import { formatPrice } from '../../utils/format';
 import Pagination from '../../components/common/Pagination';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 
@@ -90,7 +91,7 @@ export default function AdminOrders() {
                     </td>
                     <td className="px-5 py-4 text-sm text-gray-600">{order.shop?.name}</td>
                     <td className="px-5 py-4 text-sm text-gray-600">{order.items?.length || 0}</td>
-                    <td className="px-5 py-4 text-sm font-bold text-gray-900">${order.totalAmount.toFixed(2)}</td>
+                    <td className="px-5 py-4 text-sm font-bold text-gray-900">{formatPrice(order.totalAmount)}</td>
                     <td className="px-5 py-4">
                       <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${STATUS_STYLES[order.status] || 'bg-gray-50 text-gray-600'}`}>
                         {order.status}

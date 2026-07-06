@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Search, Star, Trash2 } from 'lucide-react';
 import type { Product, PaginationMeta } from '../../types';
 import { productsApi } from '../../api/products';
+import { formatPrice } from '../../utils/format';
 import Pagination from '../../components/common/Pagination';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import toast from 'react-hot-toast';
@@ -79,7 +80,7 @@ export default function AdminProducts() {
                       </td>
                       <td className="px-5 py-4 text-sm text-gray-600">{shop?.name || '—'}</td>
                       <td className="px-5 py-4 text-sm text-gray-600">{category?.name || '—'}</td>
-                      <td className="px-5 py-4 text-sm font-bold text-gray-900">${product.price.toFixed(2)}</td>
+                      <td className="px-5 py-4 text-sm font-bold text-gray-900">{formatPrice(product.price)}</td>
                       <td className="px-5 py-4 text-sm text-gray-600">{product.stock}</td>
                       <td className="px-5 py-4">
                         <div className="flex flex-col gap-1">

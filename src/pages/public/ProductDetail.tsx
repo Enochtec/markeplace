@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ShoppingCart, Heart, Star, Share2, ChevronLeft, ChevronRight, Store, ArrowLeft } from 'lucide-react';
 import type { Product } from '../../types';
 import { productsApi } from '../../api/products';
+import { formatPrice } from '../../utils/format';
 import { useAuth } from '../../contexts/AuthContext';
 import { useCart } from '../../contexts/CartContext';
 import { useWishlist } from '../../contexts/WishlistContext';
@@ -145,10 +146,10 @@ export default function ProductDetail() {
 
             {/* Price */}
             <div className="mt-5 flex items-baseline gap-3">
-              <span className="text-4xl font-extrabold text-gray-900">${product.price.toFixed(2)}</span>
+              <span className="text-4xl font-extrabold text-gray-900">{formatPrice(product.price)}</span>
               {product.comparePrice && (
                 <>
-                  <span className="text-lg text-gray-400 line-through">${product.comparePrice.toFixed(2)}</span>
+                  <span className="text-lg text-gray-400 line-through">{formatPrice(product.comparePrice)}</span>
                   <span className="text-sm font-semibold text-red-500 bg-red-50 px-2 py-0.5 rounded-full">
                     Save {discount}%
                   </span>
