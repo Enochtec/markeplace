@@ -37,77 +37,67 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center px-4 py-10">
-
-      {/* Logo */}
-      <Link to="/" className="flex items-center gap-2 mb-6">
-        <div className="w-8 h-8 bg-orange-500 rounded flex items-center justify-center">
-          <svg className="w-5 h-5 text-white" viewBox="0 0 48 48" fill="none">
-            <path d="M12 16h24l-2.5 22h-19L12 16z" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round"/>
-            <path d="M17 16v-3a7 7 0 0 1 14 0v3" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <circle cx="19.5" cy="26" r="2" fill="currentColor"/>
-            <circle cx="28.5" cy="26" r="2" fill="currentColor"/>
-          </svg>
+    <div className="min-h-screen bg-orange-50 flex items-center justify-center p-4">
+      <div className="w-full max-w-sm">
+        {/* Logo */}
+        <div className="text-center mb-8">
+          <Link to="/" className="inline-flex items-center justify-center w-12 h-12 bg-orange-500 rounded-2xl mb-5 shadow-lg shadow-orange-200">
+            <svg className="w-7 h-7 text-white" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 16h24l-2.5 22h-19L12 16z" stroke="currentColor" strokeWidth="3.5" strokeLinejoin="round" fill="none"/>
+              <path d="M17 16v-3a7 7 0 0 1 14 0v3" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+              <circle cx="19.5" cy="26" r="2" fill="currentColor"/>
+              <circle cx="28.5" cy="26" r="2" fill="currentColor"/>
+            </svg>
+          </Link>
+          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Welcome back</h1>
+          <p className="text-gray-500 mt-1.5 text-sm">Sign in to your account to continue</p>
         </div>
-        <span className="text-xl font-extrabold text-gray-900 tracking-tight">
-          Market<span className="text-orange-500">hub</span>
-        </span>
-      </Link>
 
-      {/* Card */}
-      <div className="w-full max-w-sm bg-white border border-gray-300 rounded p-7"
-        style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.07)' }}>
-
-        <h1 className="text-xl font-bold text-gray-900 mb-0.5">Sign In</h1>
-        <p className="text-sm text-gray-500 mb-6">
-          New customer?{' '}
-          <Link to="/register" className="text-orange-500 font-medium hover:text-orange-600">Start here</Link>
-        </p>
-
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Email address</label>
-            <input type="email" {...register('email', { required: 'Email is required' })}
-              className="input-field" placeholder="you@example.com" autoComplete="email" />
-            {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
-          </div>
-
-          <div>
-            <div className="flex items-center justify-between mb-1.5">
-              <label className="text-sm font-medium text-gray-700">Password</label>
-              <a href="#" className="text-xs text-orange-500 hover:text-orange-600 transition-colors">Forgot password?</a>
+        <div className="bg-white rounded-3xl shadow-xl shadow-gray-200/50 p-7">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
+              <input
+                type="email"
+                {...register('email', { required: 'Email is required' })}
+                className="input-field"
+                placeholder="you@example.com"
+              />
+              {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
             </div>
-            <div className="relative">
-              <input type={showPwd ? 'text' : 'password'}
-                {...register('password', { required: 'Password is required' })}
-                className="input-field pr-10" placeholder="Your password" autoComplete="current-password" />
-              <button type="button" onClick={() => setShowPwd(!showPwd)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
-                {showPwd ? <EyeOff size={16} /> : <Eye size={16} />}
-              </button>
-            </div>
-            {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
-          </div>
 
-          <button type="submit" disabled={isLoading} className="btn-primary w-full !py-2.5 mt-1">
-            {isLoading ? (
-              <span className="flex items-center gap-2">
-                <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/>
-                </svg>
-                Signing in…
-              </span>
-            ) : 'Sign In'}
-          </button>
-        </form>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
+              <div className="relative">
+                <input
+                  type={showPwd ? 'text' : 'password'}
+                  {...register('password', { required: 'Password is required' })}
+                  className="input-field pr-11"
+                  placeholder="Enter your password"
+                />
+                <button type="button" onClick={() => setShowPwd(!showPwd)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
+                  {showPwd ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+              {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password.message}</p>}
+            </div>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="btn-primary w-full !py-3 text-sm"
+            >
+              {isLoading ? 'Signing in...' : 'Sign In'}
+            </button>
+          </form>
+
+          <div className="mt-6 text-center text-sm text-gray-500">
+            Don't have an account?{' '}
+            <Link to="/register" className="text-orange-500 font-semibold hover:text-orange-600 transition-colors">Create account</Link>
+          </div>
+        </div>
       </div>
-
-      <p className="mt-4 text-xs text-gray-400 text-center">
-        By signing in, you agree to our{' '}
-        <a href="#" className="underline hover:text-gray-600">Terms</a> and{' '}
-        <a href="#" className="underline hover:text-gray-600">Privacy Policy</a>.
-      </p>
     </div>
   );
 }
